@@ -1,7 +1,8 @@
 APNS
 ====
 
-Improved version of the JavaPNS.
+Improved version of the JavaPNS(http://code.google.com/p/javapns).
+
 
 Sample Code
 ----------------
