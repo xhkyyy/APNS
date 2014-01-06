@@ -370,6 +370,7 @@ public class PushNotificationManager {
         }
         
         List<ResponsePacket> responsePackets = null;
+        //从next index开始push
         int next = 0;
         
         //pushedNotifications.clear();
