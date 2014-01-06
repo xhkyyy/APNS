@@ -365,6 +365,7 @@ public class PushNotificationManager {
 	* @throws
 	 */
     public List<ResponsePacket> batchPush(List<PushedNotification> pns) {
+        //
         if (pns == null || pns.size() <= 0) {
             return null;
         }
