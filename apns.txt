@@ -1,0 +1,17 @@
+测试环境:gateway.sandbox.push.apple.com
+正式环境:gateway.push.apple.com
+测试环境:可以一次发送几个十几个消息没问题.
+测试环境:要控制好发送频率,一个发送一次,或者十几个发送一次.
+
+The Feedback Service
+feedback service包含了这样的列表：某iOS应用程序对应的"设备"("设备"用二进制格式的设备token来标识)。--这些设备是由于各种原因而不能接收APNs发来的消息。
+Provider应该定期查询这个列表，并且作出对应处理，如:停止向这些的设备发送消息。
+
+provider访问feedback server通过一个与发送消息类似的二进制接口。
+Production环境通过feedback.push.apple.com:2196来建立连接，Development通过feedback.sandbox.push.apple.com:2196。
+
+feedback service和发送消息是不同的服务接口(但都属于APNs)，他的连接方式和发送消息是一样的。也要通过证书建立SSL连接，连接后你不需要发送任何命令，直接开始读取流一直读完为止，然后provider要解析读到的数据。
+
+数据是由多个这样的格式组成的：
+| 四字节时间 | 2字节的token 长度 | 32字节的设备token |
+关 于"四字节时间"：Provider需要判断对应设备的这个iOS应用程序有没有在该时间之后重新像provider发送注册推送消息所获得的设备 token。如果没有，就认为该设备失效了，需停止向该设备发送消息。如果有，那就是这个设备失效过，但是现在又有效了，只是feedback service还没来得及刷新列表。
