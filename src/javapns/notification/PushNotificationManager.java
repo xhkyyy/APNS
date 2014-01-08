@@ -377,7 +377,6 @@ public class PushNotificationManager {
         
         while (next < pns.size()) {
             try {
-                
                 setSocketEnv();
                 
                 byte[] bytes = null;
@@ -464,9 +463,7 @@ public class PushNotificationManager {
                 next++;
             }
             
-            /**
-             * 保证当token无效时不会一直无限循环push同一个identifier
-             */
+            //保证当token无效时不会一直无限循环push同一个identifier
             responsePackets = null;
         }
         return responsePackets;
